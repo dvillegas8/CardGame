@@ -15,6 +15,7 @@ public class Deck {
         cardsLeft = cards.size();
         // Shuffle deck
     }
+    // checks if the deck is empty
     public boolean isEmpty(){
         if(cardsLeft == 0){
             return true;

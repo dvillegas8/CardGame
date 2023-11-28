@@ -27,6 +27,7 @@ public class Card {
     public void setPoint(int point){
         this.point = point;
     }
+    // Prints [rank] of [suit}
     public String toString(){
         return rank + " of " + suit;
     }
