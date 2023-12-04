@@ -5,13 +5,36 @@ public class Deck {
     private int cardsLeft;
 
     // Constructor
-    public Deck(String[] ranks, String[] suits, int[] points){
+    public Deck(int[] ranks, String[] colors){
         cards = new ArrayList<Card>();
-        for(int i = 0; i < ranks.length; i++){
-            for(int j = 0; j < suits.length; j++){
-                cards.add(new Card(ranks[i], suits[j], points[i]));
+        // for the normal cards
+        for(int i = 0; i < colors.length; i++){
+            for(int j = 1; j < ranks.length; j++){
+                cards.add(new Card(ranks[j], colors[i], false));
+                cards.add(new Card(ranks[j], colors[i], false));
             }
+            // adds 1 0 card to the deck
+            cards.add(new Card(ranks[0], colors[i], false));
+            // Adds 2 +2 cards for each color
+            cards.add(new Card(colors[i], true, "+2"));
+            cards.add(new Card(colors[i], true, "+2"));
+            // Adds 2 reverse cards for each color
+            cards.add(new Card(colors[i], true, "reverse"));
+            cards.add(new Card(colors[i], true, "reverse"));
+            // Adds 2 skip cards for each color
+            cards.add(new Card(colors[i], true, "skip"));
+            cards.add(new Card(colors[i], true, "skip"));
         }
+        // adds 4 wild cards into the deck
+        cards.add(new Card("NA", true, "wild"));
+        cards.add(new Card("NA", true, "wild"));
+        cards.add(new Card("NA", true, "wild"));
+        cards.add(new Card("NA", true, "wild"));
+        // adds 4 wild +4 cards into the deck
+        cards.add(new Card("NA", true, "wild+4"));
+        cards.add(new Card("NA", true, "wild+4"));
+        cards.add(new Card("NA", true, "wild+4"));
+        cards.add(new Card("NA", true, "wild+4"));
         cardsLeft = cards.size();
         // Shuffle deck
     }
@@ -34,12 +57,16 @@ public class Deck {
     }
     public void shuffle(){
         int r = 0;
-        for(int i = cards.size() - 1; i > -1; i--){
-            r = (int) (Math.random() * cards.size() - 1);
+        for(int i = cards.size() - 1; i > 0; i--){
+            r = (int) (Math.random() * (i + 1));
             // switches the placement of cards[r] and cards[i]
             Card card = cards.get(r);
             card = cards.set(i, card);
             cards.set(r, card);
         }
+        cardsLeft = cards.size();
+    }
+    public ArrayList<Card> getCards(){
+        return cards;
     }
 }
