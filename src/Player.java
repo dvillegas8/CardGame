@@ -52,9 +52,15 @@ public class Player {
     public void addCard(Card card){
         hand.add(card);
     }
-    // ToString method
+    // Modified ToString method
     public String toString(){
-        return name + " has " + points + " points " + "\n" + name + "'s cards: " + hand;
+        String cards = "";
+        for(int i = 0; i < hand.size() - 1; i++){
+            cards += hand.get(i) + " Index: " + i + "\n";
+        }
+        int size = hand.size() - 1;
+        cards += hand.get(hand.size() - 1) + " Index: " + size;
+        return cards;
     }
 
 }

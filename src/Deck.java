@@ -24,17 +24,11 @@ public class Deck {
             // Adds 2 skip cards for each color
             cards.add(new Card(colors[i], true, "skip"));
             cards.add(new Card(colors[i], true, "skip"));
+            // adds wild cards into the deck
+            cards.add(new Card("NA", true, "wild"));
+            // adds 4 wild +4 cards into the deck
+            cards.add(new Card("NA", true, "wild+4"));
         }
-        // adds 4 wild cards into the deck
-        cards.add(new Card("NA", true, "wild"));
-        cards.add(new Card("NA", true, "wild"));
-        cards.add(new Card("NA", true, "wild"));
-        cards.add(new Card("NA", true, "wild"));
-        // adds 4 wild +4 cards into the deck
-        cards.add(new Card("NA", true, "wild+4"));
-        cards.add(new Card("NA", true, "wild+4"));
-        cards.add(new Card("NA", true, "wild+4"));
-        cards.add(new Card("NA", true, "wild+4"));
         cardsLeft = cards.size();
         // Shuffle deck
     }
