@@ -1,4 +1,4 @@
-// Diego Villegas December 11th
+// Diego Villegas December 11th 2023
 import java.util.Scanner;
 public class Game {
      // Instance variables

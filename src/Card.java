@@ -4,6 +4,7 @@ public class Card {
     private String color;
     private boolean special;
     private String special_move;
+    private boolean skipped;
 
     // Constructor for normal card
     public Card(int rank, String suit, boolean special){
@@ -13,11 +14,12 @@ public class Card {
         this.special_move = "no special_move";
     }
     // Constructor for a special card
-    public Card(String color, boolean special, String special_move){
+    public Card(String color, boolean special, String special_move, boolean skipped){
         this.rank = -1;
         this.color = color;
         this.special = special;
         this.special_move = special_move;
+        this.skipped = skipped;
     }
     public int getRank(){
         return rank;
@@ -42,6 +44,12 @@ public class Card {
     }
     public void setSpecialMove(String special_move){
         this.special_move = special_move;
+    }
+    public boolean getSkipped(){
+        return skipped;
+    }
+    public void setSkipped(boolean skipped){
+        this.skipped = skipped;
     }
     // Prints [rank] of [suit}
     public String toString(){

@@ -16,18 +16,18 @@ public class Deck {
             // adds 1 0 card to the deck
             cards.add(new Card(ranks[0], colors[i], false));
             // Adds 2 +2 cards for each color
-            cards.add(new Card(colors[i], true, "+2"));
-            cards.add(new Card(colors[i], true, "+2"));
+            cards.add(new Card(colors[i], true, "+2", true));
+            cards.add(new Card(colors[i], true, "+2", true));
             // Adds 2 reverse cards for each color
-            cards.add(new Card(colors[i], true, "reverse"));
-            cards.add(new Card(colors[i], true, "reverse"));
+            cards.add(new Card(colors[i], true, "reverse", false));
+            cards.add(new Card(colors[i], true, "reverse", false));
             // Adds 2 skip cards for each color
-            cards.add(new Card(colors[i], true, "skip"));
-            cards.add(new Card(colors[i], true, "skip"));
+            cards.add(new Card(colors[i], true, "skip", true));
+            cards.add(new Card(colors[i], true, "skip", true));
             // adds wild cards into the deck
-            cards.add(new Card("NA", true, "wild"));
+            cards.add(new Card("NA", true, "wild", false));
             // adds 4 wild +4 cards into the deck
-            cards.add(new Card("NA", true, "wild+4"));
+            cards.add(new Card("NA", true, "wild+4", true));
         }
         cardsLeft = cards.size();
         // Shuffle deck
