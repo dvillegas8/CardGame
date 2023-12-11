@@ -76,6 +76,7 @@ public class Game {
             if(direction.equals("right")){
                 // Player's turn
                 if(turn == 0){
+                    // Checks if turns should be skipped
                     if(!skip){
                         System.out.println(playerOne.getName() + "'s turn: ");
                         playerTurn();
