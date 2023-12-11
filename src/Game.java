@@ -19,6 +19,7 @@ public class Game {
          colors = new String[]{"red", "yellow", "blue", "green"};
          ranks = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
          deck = new Deck(ranks, colors);
+         deck.shuffle();
          while(true){
              current_card = deck.deal();
              if(!current_card.getSpecial()){
@@ -35,169 +36,168 @@ public class Game {
         return instructions;
     }
     public void unoGame(){
-         int turn = 0;
-         boolean skip = false;
-         boolean already_skipped = false;
-         String direction = "right";
-         deck.shuffle();
-         for(int i = 0; i < 7; i++){
-             playerOne.addCard(deck.deal());
-             botOne.addCard(deck.deal());
-             botTwo.addCard(deck.deal());
-             botThree.addCard(deck.deal());
-         }
-         while(!checkWin()){
-             // Checks if the deck is empty so it shuffles it again
-             if(deck.isEmpty()){
-                 deck.shuffle();
-             }
-             // Figures out the direction of the game
-             if(current_card.getSpecial()){
-                 if(current_card.getSpecialMove().equals("reverse") && direction.equals("right")){
-                     direction = "left";
-                 }
-                 else if(current_card.getSpecialMove().equals("reverse") && direction.equals("left")){
-                     direction = "right";
-                     turn++;
-                     if(turn > 3){
-                         turn = 0;
-                     }
-                 }
-             }
-             // Figures out if a turn is going to be skipped
-             if(current_card.getSpecial()){
-                 if(current_card.getSpecialMove().equals("skip") && !already_skipped){
-                     skip = true;
-                 }
-             }
-             already_skipped = false;
-             // Turns
-             if(direction.equals("right")){
-                 // Player's turn
-                 if(turn == 0){
-                     if(!skip){
-                         System.out.println(playerOne.getName() + "'s turn: ");
-                         playerTurn();
-                     }
-                     else{
-                         System.out.println(playerOne.getName() + " got skipped");
-                         skip = false;
-                         already_skipped = true;
-                     }
-                     turn++;
-                 }
-                 // Bot 1 turn
-                 else if(turn == 1){
-                     if(!skip){
-                         System.out.println(botOne.getName() + "'s turn: ");
-                         botTurn(botOne);
-                     }
-                     else{
-                         System.out.println(botOne.getName() + " got skipped");
-                         skip = false;
-                         already_skipped = true;
-                     }
-                     turn++;
-                 }
-                 // Bot 2 turn
-                 else if(turn == 2){
-                     if(!skip){
-                         System.out.println(botTwo.getName() + "'s turn: ");
-                         botTurn(botTwo);
-                     }
-                     else{
-                         System.out.println(botTwo.getName() + " got skipped");
-                         skip = false;
-                         already_skipped = true;
-                     }
-                     turn++;
-                 }
-                 // Bot 3 turn
-                 else if(turn == 3){
-                     if(!skip){
-                         System.out.println(botThree.getName() + "'s turn: ");
-                         botTurn(botThree);
-                     }
-                     else{
-                         System.out.println(botThree.getName() + " got skipped");
-                         skip = false;
-                         already_skipped = true;
-                     }
-                     turn = 0;
-                 }
-                 else {
-                     System.out.println("Error");
-                 }
-             }
-             else if(direction.equals("left")){
-                 // reset turn so that it doesn't equal a negative number
-                 turn--;
-                 if(turn - 1 < 0){
-                     turn = 4;
-                 }
-                 turn--;
-                 // Players turn
-                 if(turn == 0){
-                     if(!skip){
-                         System.out.println(botOne.getName() + "'s turn: ");
-                         playerTurn();
-                     }
-                     else{
-                         System.out.println(botOne.getName() + " got skipped");
-                         skip = false;
-                         already_skipped = true;
-                     }
-                 }
-                 // Bot 1's turn
-                 else if(turn == 1){
-                     if(!skip){
-                         System.out.println(botOne.getName() + "'s turn: ");
-                         botTurn(botOne);
-                     }
-                     else{
-                         System.out.println(botOne.getName() + " got skipped");
-                         skip = false;
-                         already_skipped = true;
-                     }
-                 }
-                 // Bot 2's turn
-                 else if(turn == 2){
-                     if(!skip){
-                         System.out.println(botTwo.getName() + "'s turn: ");
-                         botTurn(botTwo);
-                     }
-                     else{
-                         System.out.println(botTwo.getName() + " got skipped");
-                         skip = false;
-                         already_skipped = true;
-                     }
-                 }
-                 // Bot 3's turn
-                 else if(turn == 3){
-                     if(!skip){
-                         System.out.println(botThree.getName() + "'s turn: ");
-                         botTurn(botThree);
-                     }
-                     else{
-                         System.out.println(botThree.getName() + " got skipped");
-                         skip = false;
-                         already_skipped = true;
-                     }
-                 }
-             }
-         }
-         if(playerOne.getHand().isEmpty()){
-             System.out.println("You win!");
-         }
-         else if(botOne.getHand().isEmpty()){
+        int turn = 0;
+        boolean skip = false;
+        boolean already_skipped = false;
+        String direction = "right";
+        deck.shuffle();
+        for(int i = 0; i < 7; i++){
+            playerOne.addCard(deck.deal());
+            botOne.addCard(deck.deal());
+            botTwo.addCard(deck.deal());
+            botThree.addCard(deck.deal());
+        }
+        while(!checkWin()){
+            // Checks if the deck is empty so it shuffles it again
+            if(deck.isEmpty()){
+                deck.shuffle();
+            }
+            // Figures out the direction of the game
+            if(current_card.getSpecial()){
+                if(current_card.getSpecialMove().equals("reverse") && direction.equals("right")){
+                    direction = "left";
+                }
+                else if(current_card.getSpecialMove().equals("reverse") && direction.equals("left")){
+                    direction = "right";
+                    turn++;
+                    if(turn > 3){
+                        turn = 0;
+                    }
+                }
+            }
+            // Figures out if a turn is going to be skipped
+            if(current_card.getSpecial()){
+                if(current_card.getSpecialMove().equals("skip") && !already_skipped){
+                    skip = true;
+                }
+            }
+            already_skipped = false;
+            // Turns
+            if(direction.equals("right")){
+                // Player's turn
+                if(turn == 0){
+                    if(!skip){
+                        System.out.println(playerOne.getName() + "'s turn: ");
+                        playerTurn();
+                    }
+                    else{
+                        System.out.println(playerOne.getName() + " got skipped");
+                        skip = false;
+                        already_skipped = true;
+                    }
+                    turn++;
+                }
+                // Bot 1 turn
+                else if(turn == 1){
+                    if(!skip){
+                        System.out.println(botOne.getName() + "'s turn: ");
+                        botTurn(botOne);
+                    }
+                    else{
+                        System.out.println(botOne.getName() + " got skipped");
+                        skip = false;
+                        already_skipped = true;
+                    }
+                    turn++;
+                }
+                // Bot 2 turn
+                else if(turn == 2){
+                    if(!skip){
+                        System.out.println(botTwo.getName() + "'s turn: ");
+                        botTurn(botTwo);
+                    }
+                    else{
+                        System.out.println(botTwo.getName() + " got skipped");
+                        skip = false;
+                        already_skipped = true;
+                    }
+                    turn++;
+                }
+                // Bot 3 turn
+                else if(turn == 3){
+                    if(!skip){
+                        System.out.println(botThree.getName() + "'s turn: ");
+                        botTurn(botThree);
+                    }
+                    else{
+                        System.out.println(botThree.getName() + " got skipped");
+                        skip = false;
+                        already_skipped = true;
+                    }
+                    turn = 0;
+                }
+                else {
+                    System.out.println("Error");
+                }
+            }
+            else if(direction.equals("left")){
+                // reset turn so that it doesn't equal a negative number
+                if(turn == 0){
+                    turn = 4;
+                }
+                turn--;
+                // Players turn
+                if(turn == 0){
+                    if(!skip){
+                        System.out.println(botOne.getName() + "'s turn: ");
+                        playerTurn();
+                    }
+                    else{
+                        System.out.println(botOne.getName() + " got skipped");
+                        skip = false;
+                        already_skipped = true;
+                    }
+                }
+                // Bot 1's turn
+                else if(turn == 1){
+                    if(!skip){
+                        System.out.println(botOne.getName() + "'s turn: ");
+                        botTurn(botOne);
+                    }
+                    else{
+                        System.out.println(botOne.getName() + " got skipped");
+                        skip = false;
+                        already_skipped = true;
+                    }
+                }
+                // Bot 2's turn
+                else if(turn == 2){
+                    if(!skip){
+                        System.out.println(botTwo.getName() + "'s turn: ");
+                        botTurn(botTwo);
+                    }
+                    else{
+                        System.out.println(botTwo.getName() + " got skipped");
+                        skip = false;
+                        already_skipped = true;
+                    }
+                }
+                // Bot 3's turn
+                else if(turn == 3){
+                    if(!skip){
+                        System.out.println(botThree.getName() + "'s turn: ");
+                        botTurn(botThree);
+                    }
+                    else{
+                        System.out.println(botThree.getName() + " got skipped");
+                        skip = false;
+                        already_skipped = true;
+                    }
+                }
+            }
+        }
+        if(playerOne.getHand().isEmpty()){
+            System.out.println("You win!");
+        }
+        else if(botOne.getHand().isEmpty()){
             System.out.println("Bot 1 wins");
-         }
-         else if(botTwo.getHand().isEmpty()){
-             System.out.println("Bot 2 wins");
-         }
-         else if(botThree.getHand().isEmpty()){
-             System.out.println("Bot 3 wins");
-         }
+        }
+        else if(botTwo.getHand().isEmpty()){
+            System.out.println("Bot 2 wins");
+        }
+        else if(botThree.getHand().isEmpty()){
+            System.out.println("Bot 3 wins");
+        }
     }
     public void playerTurn() {
         System.out.println("Current card is : " + current_card);
