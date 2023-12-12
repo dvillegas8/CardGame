@@ -56,6 +56,7 @@ public class Game {
             if(current_card.getSpecial()){
                 if(current_card.getSpecialMove().equals("reverse") && direction.equals("right")){
                     direction = "left";
+                    turn--;
                 }
                 else if(current_card.getSpecialMove().equals("reverse") && direction.equals("left")){
                     direction = "right";
